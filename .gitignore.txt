@@ -1,0 +1,15 @@
+# Maven & Build
+target/
+*.iml
+.idea/
+*.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Spring Boot
+*.jar
