@@ -1,5 +1,6 @@
 package com.bookstore.user_service.controller;
 
+import com.bookstore.user_service.dto.UserResponse;
 import com.bookstore.user_service.entity.User;
 import com.bookstore.user_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,18 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // Get user by ID
+    // Get user by ID (returns UserResponse)
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         return userService.getUserById(id)
+                .map(user -> new UserResponse(
+                        user.getUserId(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getRole(),
+                        user.getAddress(),
+                        user.getPassword()
+                ))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

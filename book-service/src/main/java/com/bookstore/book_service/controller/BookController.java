@@ -14,8 +14,11 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+    @PutMapping("/{id}/reduce-stock")
+    public Book reduceStock(@PathVariable Long id, @RequestParam int qty) {
+        return bookService.reduceStock(id, qty);
+    }
 
-    // Create book
     @PostMapping
     public Book createBook(@RequestBody Book book) {
         return bookService.createBook(book);

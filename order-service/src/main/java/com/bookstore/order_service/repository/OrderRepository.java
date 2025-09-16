@@ -5,8 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
-
-    // Custom queries
-    List<Order> findByUserId(Long userId);
-    List<Order> findByBookId(Long bookId);
+    List<Order> findByUserId(Long userId);  // Needed for getOrdersByUser()
 }

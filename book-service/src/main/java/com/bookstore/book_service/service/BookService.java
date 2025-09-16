@@ -41,6 +41,17 @@ public class BookService {
 
         return bookRepository.save(book);
     }
+    public Book reduceStock(Long id, int qty) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        if (book.getStock() < qty) {
+            throw new RuntimeException("Not enough stock available");
+        }
+
+        book.setStock(book.getStock() - qty);
+        return bookRepository.save(book);
+    }
 
     // Delete book
     public void deleteBook(Long id) {
